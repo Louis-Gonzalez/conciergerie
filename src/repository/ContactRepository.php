@@ -65,13 +65,14 @@ class ContactRepository
                     $title= Utils::cleaner($_POST['title-message']);
                     $chalet = Utils::cleaner($_POST['chalet']);
                     $description = Utils::cleaner($_POST['description-message']);
+                    $status = "En attente";
                     $email = Utils::cleaner($_POST['email-message']);
                     $create_at = date('Y-m-d H:i:s');
                     $update_at = date('Y-m-d H:i:s');
                     // Insertion des champs dans la base de données
                     $message = $pdo->query("    INSERT INTO contact 
-                                                (title, chalet, description, email, create_at, update_at) 
-                                                VALUES ( ?, ?, ?, ?, ?, ?)",[$title, $chalet, $description, $email, $create_at, $update_at]);
+                                                (title, chalet, description, status, email, create_at, update_at) 
+                                                VALUES ( ?, ?, ?, ?, ?, ?, ?)",[$title, $chalet, $description, $status, $email, $create_at, $update_at]);
                     // Redirection vers le tableau des tâches
                     header('Location: /formation_php/tp_fin_php/public/contact');
                 }

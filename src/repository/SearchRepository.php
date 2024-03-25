@@ -110,7 +110,8 @@ class SearchRepository
                 // var_dump("valeur de keyword : ", $keyword);
                 $sql = "SELECT * FROM contact
                         WHERE title LIKE '%$keyword%'
-                        OR description LIKE '%$keyword%'";
+                        OR description LIKE '%$keyword%'
+                        OR chalet LIKE '%$keyword%'";
                 
                 $messages = $pdo->selectAll($sql , []);
         return $messages;
