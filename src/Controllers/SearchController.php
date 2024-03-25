@@ -81,18 +81,18 @@ class SearchController extends AbstractController
                                                 'tasks' => $tasks
                                             ]);
     }
-    public function filterChallet()
+    public function filterChalet()
     {
         // Déterminer le dossier qui va contenir les vues
         // __DIR__ = le dossier parant dans lequel on est  et dirname(__DIR__) = renvoie directement à la racine
         $loader = new FilesystemLoader("../templates"); 
         // Initialiser twig 
         $twig = new Environment($loader);
-        // var_dump($_POST['challet']); //  en cours, en attente, terminé
+        // var_dump($_POST['chalet']); //  en cours, en attente, terminé
         // die();
-        $keyword = $_POST['challet']; // je trouve la correspondance avec la valeur du drop down
+        $keyword = $_POST['chalet']; // je trouve la correspondance avec la valeur du drop down
         $tasks = new SearchRepository();
-        $tasks = $tasks->filterChallet($keyword);
+        $tasks = $tasks->filterChalet($keyword);
         // Rendre une vue
         $this->render('searchpage.twig', [
                                                 'keyword' => $keyword,

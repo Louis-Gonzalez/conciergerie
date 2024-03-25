@@ -11,6 +11,7 @@ use App\TpFinPhp\Services\Database;
 use App\TpFinPhp\Services\Utils;
 use App\TpFinPhp\Controllers\AbstractController;
 use App\TpFinPhp\Repository\ContactRepository;
+use App\TpFinPhp\Repository\TaskRepository;
 
 /**
  * gère la route de la page de contact 
@@ -25,7 +26,6 @@ class ContactController extends AbstractController
     {
         /**
          * SELECT * FROM contact
-         * Se connecter à la base de données
          * @var string $messages
          * @return $messages dans la vue twig contactpage
          */
@@ -35,6 +35,15 @@ class ContactController extends AbstractController
         $twig = new Environment($loader);
         $messages = new ContactRepository();
         $messages = $messages->index();
+        if (isset($_POST['id']) && isset($_POST['duration']) && isset($_POST['who']) && !empty($_POST['id']) && !empty($_POST['duration']) && !empty($_POST['who'])) {
+            $key = array_search($_POST['id'], array_column($messages, 'id'));
+
+            // var_dump($key);
+            $task = new TaskRepository();
+            $task = $task->newTaskByContact($messages[$key]);
+            $this->deleteMessage($_POST['id']);
+            header("Location: http://localhost/formation_php/tp_fin_php/public/task");
+        }
         $this->render('contactpage.twig', [
                                                 'messages' => $messages,
                                             ]);

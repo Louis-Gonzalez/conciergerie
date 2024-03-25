@@ -17,7 +17,7 @@ class TaskRepository
         // Se connecter à la base de données
         $pdo = new Database (
                                 "127.0.0.1",
-                                "challet_php",
+                                "chalet_php",
                                 "3306",
                                 "root",
                                 ""
@@ -31,14 +31,14 @@ class TaskRepository
             // Se connecter à la base de données
         $pdo = new Database (
                                 "127.0.0.1",
-                                "challet_php",
+                                "chalet_php",
                                 "3306",
                                 "root",
                                 ""
                             );
     // Vérification des champs qui ont update dans le formulaire
-    if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['duration']) && isset($_POST['who']) && isset($_POST['challet'])
-    && !empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['duration']) && !empty($_POST['who']) && !empty($_POST['challet'])) 
+    if(isset($_POST['title']) && isset($_POST['description']) && isset($_POST['duration']) && isset($_POST['who']) && isset($_POST['chalet'])
+    && !empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['duration']) && !empty($_POST['who']) && !empty($_POST['chalet'])) 
         {
             var_dump($_POST['who']);
             // die();
@@ -46,22 +46,55 @@ class TaskRepository
             $description = Utils::cleaner($_POST['description']);
             $duration = Utils::cleaner($_POST['duration']);
             $who = Utils::cleaner($_POST['who']);
-            $challet = Utils::cleaner($_POST['challet']);
+            $chalet = Utils::cleaner($_POST['chalet']);
             $status = "En attente";
             // Insertion des champs dans la base de données
             $newTask = $pdo->query("    INSERT INTO task 
-                                        (title, description, duration, who, challet, status) 
-                                        VALUES ( ?, ?, ?, ?, ?, ?)", [ $title, $description, $duration, $who, $challet,  $status ]);
+                                        (title, description, duration, who, chalet, status) 
+                                        VALUES ( ?, ?, ?, ?, ?, ?)", [ $title, $description, $duration, $who, $chalet,  $status ]);
         }
         return $newTask;
     }
+    public function newTaskByContact($messages)
+    {
+        
+            // Se connecter à la base de données
+        $pdo = new Database (
+                                "127.0.0.1",
+                                "chalet_php",
+                                "3306",
+                                "root",
+                                ""
+                            );
+        
+
+    // Vérification des champs qui ont update dans le formulaire
+    if(isset($_POST['duration']) && isset($_POST['who']) &&  !empty($_POST['duration']) && !empty($_POST['who'])) 
+        {
+            // die();
+            $title = $messages['title']; 
+            $description = $messages['description'];
+            $chalet = $messages['chalet'];
+            $duration = Utils::cleaner($_POST['duration']);
+            $who = Utils::cleaner($_POST['who']);
+            $status = "En attente";
+            // Insertion des champs dans la base de données
+            $newTask = $pdo->query("    INSERT INTO task 
+                                        (title, description, duration, who, chalet, status) 
+                                        VALUES ( ?, ?, ?, ?, ?, ?)", [ $title, $description, $duration, $who, $chalet, $status ]);
+        }
+        
+        return $newTask;
+    }
+
+
     public function show($id)
     {
         // la correspondance de l'id souhaite via une requete sql
         // Se connecter à la base de données
         $pdo = new Database(
             "127.0.0.1",
-            "challet_php",
+            "chalet_php",
             "3306",
             "root",
             ""
@@ -73,7 +106,7 @@ class TaskRepository
     {
         $pdo = new Database(
             "127.0.0.1",
-            "challet_php",
+            "chalet_php",
             "3306",
             "root",
             ""
@@ -86,7 +119,7 @@ class TaskRepository
     {
         $pdo = new Database(
             "127.0.0.1",
-            "challet_php",
+            "chalet_php",
             "3306",
             "root",
             ""
@@ -98,7 +131,7 @@ class TaskRepository
             $description = Utils::cleaner($_POST['description']);
             $duration = Utils::cleaner($_POST['duration']);
             $who = Utils::cleaner($_POST['who']);
-            $challet = Utils::cleaner($_POST['challet']);
+            $chalet = Utils::cleaner($_POST['chalet']);
             $status = Utils::cleaner($_POST['status']);
             $update_at = date("Y-m-d H:i:s");
             $pdo->query(
@@ -107,7 +140,7 @@ class TaskRepository
                             description = :description, 
                             duration = :duration, 
                             who = :who, 
-                            challet = :challet, 
+                            chalet = :chalet, 
                             status = :status, 
                             update_at = :update_at 
                             where id = :id",
@@ -117,7 +150,7 @@ class TaskRepository
                                 'description' => $description,
                                 'duration' => $duration,
                                 'who' => $who,
-                                'challet' => $challet,
+                                'chalet' => $chalet,
                                 'status' => $status,
                                 'update_at' => $update_at,
                             ]
@@ -130,7 +163,7 @@ class TaskRepository
     {
         $pdo = new Database(
             "127.0.0.1",
-            "challet_php",
+            "chalet_php",
             "3306",
             "root",
             ""
@@ -166,7 +199,7 @@ class TaskRepository
     {
         $pdo = new Database(
             "127.0.0.1",
-            "challet_php",
+            "chalet_php",
             "3306",
             "root",
             ""

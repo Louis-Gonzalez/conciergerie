@@ -15,7 +15,7 @@ class SearchRepository
         // Se connecter à la base de données
         $pdo = new Database (
                                 "127.0.0.1",
-                                "challet_php",
+                                "chalet_php",
                                 "3306",
                                 "root",
                                 ""
@@ -27,7 +27,7 @@ class SearchRepository
         WHERE title LIKE '%$keyword%'
         OR description LIKE '%$keyword%'
         OR duration LIKE '%$keyword%'
-        OR challet LIKE '%$keyword%'";
+        OR chalet LIKE '%$keyword%'";
 
         $tasks = $pdo->selectAll($sql , []);  
         
@@ -38,7 +38,7 @@ class SearchRepository
         // Se connecter à la base de données
         $pdo = new Database (
                                 "127.0.0.1",
-                                "challet_php",
+                                "chalet_php",
                                 "3306",
                                 "root",
                                 ""
@@ -53,7 +53,7 @@ class SearchRepository
         // Se connecter à la base de données
         $pdo = new Database (
                                 "127.0.0.1",
-                                "challet_php",
+                                "chalet_php",
                                 "3306",
                                 "root",
                                 ""
@@ -63,18 +63,18 @@ class SearchRepository
         $tasks = $pdo->selectAll($sql , []);  
         return $tasks;
     }
-    public function filterChallet($keyword)
+    public function filterChalet($keyword)
     {
         // Se connecter à la base de données
         $pdo = new Database (
                                 "127.0.0.1",
-                                "challet_php",
+                                "chalet_php",
                                 "3306",
                                 "root",
                                 ""
                             );
         $sql = "SELECT * FROM task
-        WHERE challet LIKE '%$keyword%' ";
+        WHERE chalet LIKE '%$keyword%' ";
         $tasks = $pdo->selectAll($sql , []);  
         return $tasks;
     }
@@ -83,7 +83,7 @@ class SearchRepository
         // Se connecter à la base de données
         $pdo = new Database (
                                 "127.0.0.1",
-                                "challet_php",
+                                "chalet_php",
                                 "3306",
                                 "root",
                                 ""
@@ -99,7 +99,7 @@ class SearchRepository
         // Se connecter à la base de données
         $pdo = new Database (
                                 "127.0.0.1",
-                                "challet_php",
+                                "chalet_php",
                                 "3306",
                                 "root",
                                 ""

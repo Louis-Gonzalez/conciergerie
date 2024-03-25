@@ -7,7 +7,7 @@
     </div>
     <form method ="POST" action="http://localhost/formation_php/tp_fin_php/public/contact/search" class="d-flex" role="search">
         <div class="add-post m-2">
-            <a class="btn btn-success" href="http://localhost/formation_php/tp_fin_php/public/contact/new">Envoyer un message</a> <!--  la valeur du href correspond au nom du controller action renvoie au nom de la fonction -->
+            <a class="btn btn-success" href="http://localhost/formation_php/tp_fin_php/public/contact/new">Créer un message Contact</a> <!--  la valeur du href correspond au nom du controller action renvoie au nom de la fonction -->
         </div>
         <input name="keyword" class="form-control me-2" type="search" placeholder="Search Message" aria-label="keyword">
         <button class="btn btn-outline-success m-2" type="submit">Search Message</button>
@@ -18,7 +18,9 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Chalet</th>
                 <th scope="col">Description</th>
+                <th scope="col">Status</th>
                 <th scope="col">Date création</th>
                 <th scope="col">Date modification</th>
                 <th scope="col">Actions</th>
@@ -29,8 +31,9 @@
             <tr class="text-center">
                 <th scope="row">{{ message.id }}</th>
                 <td>{{ message.title }}</td>
-                <td>{{ message.challet }}</td>
+                <td>{{ message.chalet }}</td>
                 <td>{{ message.description }}</td>
+                <td>{{ message.status}}</td>
                 <td>{{ message.create_at }}</td>
                 <td>{{ message.update_at }}</td>
             
@@ -38,15 +41,57 @@
                     <a type="button" class="btn btn-warning m-1" href="http://localhost/formation_php/tp_fin_php/public/contact/{{message.id}}">
                         Voir le message
                     </a>
-                    <a type="button" class="btn btn-primary m-1" href="http://localhost/formation_php/tp_fin_php/public/contact/update/{{message.id}}">
-                        Modifier le message
+                    <a type="button" class="btn btn-primary m-1" data-bs-toggle="modal" href="#task-by-contact-modal-{{message.id}}">
+                        Créer la tâche
                     </a>
                     <a type="button" class="btn btn-danger m-1" href="javascript:deleteMessage({{message.id}})">
                         Supprimer le message
                     </a>
                 </td>
             </tr>
+            <div class="modal" id="task-by-contact-modal-{{message.id}}" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ajouter la personne affectée à la tâche</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST">
+                        <div class="modal-body">
+                            <div class="m-2"><!-- faire un menu déroulant -->
+                            <input type="hidden" name="id" value="{{message.id}}">
+                                <label for="who">Choose who*</label>
+                                <select name="who" id="who" required>
+                                    <option>--Please choose an option--</option>
+                                    <option>Adam - electricity</option>
+                                    <option>Cédric - plumber</option>
+                                    <option>Julien - gas</option>
+                                    <option>Louis - carpenter</option>
+                                    <option>Marc - piscinist</option>
+                                    <option>Thomas - driver</option>
+                                    <option>Victoria - special service</option>
+                                </select>
+                            </div>
+                            <div class="m-6"> <!-- faire un menu déroulant -->
+                                <label for="duration">Choose duration</label>
+                                <select name="duration" id="duration" required>
+                                    <option>--Please choose an option--</option>
+                                    <option>Très Urgent</option>
+                                    <option>Urgent</option>
+                                    <option>A prévoir</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Créer la tache en Auto</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
+        </div>
         </tbody>
     </table>
     <script>

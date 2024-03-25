@@ -107,8 +107,12 @@ class Router
             $controller->new();
         }
 
-        // La route pour la tâche new
+        // http://localhost/formation_php/tp_fin_php/public/task/new/contact
 
+        // A voir si je passe par un template twig ou pas
+
+        // La route pour la tâche new
+        
         else if (array_key_exists(6, $parts) && intval($parts[6]) && $parts[6] !== "" && $parts[5] === "delete" && $parts[4] === "task") {
             // Instancier le controller et appeler la méthode 
             $id = (int)$parts[6];
@@ -198,11 +202,11 @@ class Router
             $controller = new SearchController();
             $controller->filterWho();
         }
-        // http://localhost/formation_php/tp_fin_php_php/public/task/filter/challet
-        if (array_key_exists(6, $parts) && $parts[6] === "challet" && $parts[5] === "filter" && $parts[4] === "task") {
+        // http://localhost/formation_php/tp_fin_php_php/public/task/filter/chalet
+        if (array_key_exists(6, $parts) && $parts[6] === "chalet" && $parts[5] === "filter" && $parts[4] === "task") {
             // Instancier le controller et appeler la méthode 
             $controller = new SearchController();
-            $controller->filterChallet();
+            $controller->filterChalet();
         }
         // http://localhost/formation_php/tp_fin_php/public/task/filter/date
         if (array_key_exists(6, $parts) && $parts[6] === "date" && $parts[5] === "filter" && $parts[4] === "task") {
@@ -211,8 +215,9 @@ class Router
             $controller->filterDate();
         }
 
-
-        // http://localhost/formation_php/tp_fin_php_php/public/contact/11
+        // http://localhost/formation_php/tp_fin_php/public/contact/{{message.id}}
+        // http://localhost/formation_php/tp_fin_php/public/contact/9
+        // http://localhost/formation_php/tp_fin_php/public/contact/11   
         if (array_key_exists(5, $parts) && intval($parts[5]) && $parts[4] === "contact") {
             // Instancier le controller et appeler la méthode 
             $id = (int)$parts[5];

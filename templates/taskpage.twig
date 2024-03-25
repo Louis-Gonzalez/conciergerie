@@ -45,17 +45,17 @@
         </div>
         <div class="dropdown  m-2">
             <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Par Challet
+                Par Chalet
             </button>
             <ul class="dropdown-menu">
-                <form method="POST" action="http://localhost/formation_php/tp_fin_php/public/task/filter/challet">
-                    <li><button type="submit" class="dropdown-item" name="challet" value="">Tous</button></li>
-                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 1 - hauntedHome">challet 1 - hauntedHome </button></li>
-                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 2 - foresthome">challet 2 - foresthome</button></li>
-                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 3 - trianglehome">challet 3 - trianglehome</button></li>
-                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 4 - snowhome">challet 4 - snowhome</button></li>
-                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 5 - LakeHome">challet 5 - LakeHome</button></li>
-                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 6 - plainHome">challet 6 - plainHome</button></li>
+                <form method="POST" action="http://localhost/formation_php/tp_fin_php/public/task/filter/chalet">
+                    <li><button type="submit" class="dropdown-item" name="chalet" value="">Tous</button></li>
+                    <li><button type="submit" class="dropdown-item" name="chalet" value="chalet 1 - hauntedHome">chalet 1 - hauntedHome </button></li>
+                    <li><button type="submit" class="dropdown-item" name="chalet" value="chalet 2 - foresthome">chalet 2 - foresthome</button></li>
+                    <li><button type="submit" class="dropdown-item" name="chalet" value="chalet 3 - trianglehome">chalet 3 - trianglehome</button></li>
+                    <li><button type="submit" class="dropdown-item" name="chalet" value="chalet 4 - snowhome">chalet 4 - snowhome</button></li>
+                    <li><button type="submit" class="dropdown-item" name="chalet" value="chalet 5 - LakeHome">chalet 5 - LakeHome</button></li>
+                    <li><button type="submit" class="dropdown-item" name="chalet" value="chalet 6 - plainHome">chalet 6 - plainHome</button></li>
                 </form>
             </ul>
         </div>
@@ -93,9 +93,9 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
-                <th scope="col">Durée</th>
-                <th scope="col">Qui</th>
                 <th scope="col">Etat</th>
+                <th scope="col">Qui</th>
+                <th scope="col">Chalet</th>
                 <th scope="col">Date création</th>
                 <th scope="col">Date modification</th>
                 <th scope="col" class="text-center">Actions</th>
@@ -110,7 +110,7 @@
                 <td>{{ task.description }}</td>
                 <td>{{ task.duration }}</td>
                 <td>{{ task.who }}</td>
-                <td>{{ task.challet }}</td>
+                <td>{{ task.chalet }}</td>
                 <td>
                     {% if task.status == "En attente" %}
                         <span class="badge bg-warning">En attente</span>
