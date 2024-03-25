@@ -1,0 +1,167 @@
+{# On étend le fichier base ici, car dans base on a déclare des blocks #}
+{% extends 'base.twig' %} 
+
+{% block content %}
+    <div class="text-center m-2">
+        <h1>Home Task</h1>
+    </div>
+    <form method ="POST" action="http://localhost/formation_php/tp_fin_php/public/task/search" class="d-flex" role="search">
+        <div class="add-post m-2">
+            <a class="btn btn-success" href="http://localhost/formation_php/tp_fin_php/public/task/new">Ajouter une Tache</a> <!--  la valeur du href correspond au nom du controller action renvoie au nom de la fonction -->
+        </div>
+        <input name="keyword" class="form-control me-2" type="search" placeholder="Search task" aria-label="keyword">
+        <button class="btn btn-outline-success m-2" type="submit">Search Task</button>
+    </form>
+    <div class="d-flex w-300 justify-content-center">
+        <div class="dropdown  m-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Status des tâches
+            </button>
+            <ul class="dropdown-menu">
+                <form method="POST" action="http://localhost/formation_php/tp_fin_php/public/task/filter/status">
+                    <li><button type="submit" class="dropdown-item" name="status" value="">Tous</button></li>
+                    <li><button type="submit" class="dropdown-item" name="status" value="En attente">Tâches en attente</button></li>
+                    <li><button type="submit" class="dropdown-item" name="status" value="En cours">Tâches en cours</button></li>
+                    <li><button type="submit" class="dropdown-item" name="status" value="Terminé">Tâches terminées</button></li>
+                </form>
+            </ul>
+        </div>
+        <div class="dropdown  m-2">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Affectation des tâches
+            </button>
+            <ul class="dropdown-menu">
+                <form method="POST" action="http://localhost/formation_php/tp_fin_php/public/task/filter/who">
+                    <li><button type="submit" class="dropdown-item" name="who" value="">Tous</button></li>
+                    <li><button type="submit" class="dropdown-item" name="who" value="Adam - electricity">Adam - electricity</button></li>
+                    <li><button type="submit" class="dropdown-item" name="who" value="Cédric - plumber">Cédric - plumber</button></li>
+                    <li><button type="submit" class="dropdown-item" name="who" value="Julien - gas">Julien - gas</button></li>
+                    <li><button type="submit" class="dropdown-item" name="who" value="Louis - carpenter">Louis - carpenter</button></li>
+                    <li><button type="submit" class="dropdown-item" name="who" value="Marc - piscinist">Marc - piscinist</button></li>
+                    <li><button type="submit" class="dropdown-item" name="who" value="Thomas - driver">Thomas - driver</button></li>
+                    <li><button type="submit" class="dropdown-item" name="who" value="Victoria - Special service">Victoria - Special service</button></li>
+                </form>
+            </ul>
+        </div>
+        <div class="dropdown  m-2">
+            <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Par Challet
+            </button>
+            <ul class="dropdown-menu">
+                <form method="POST" action="http://localhost/formation_php/tp_fin_php/public/task/filter/challet">
+                    <li><button type="submit" class="dropdown-item" name="challet" value="">Tous</button></li>
+                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 1 - hauntedHome">challet 1 - hauntedHome </button></li>
+                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 2 - foresthome">challet 2 - foresthome</button></li>
+                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 3 - trianglehome">challet 3 - trianglehome</button></li>
+                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 4 - snowhome">challet 4 - snowhome</button></li>
+                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 5 - LakeHome">challet 5 - LakeHome</button></li>
+                    <li><button type="submit" class="dropdown-item" name="challet" value="challet 6 - plainHome">challet 6 - plainHome</button></li>
+                </form>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button data-bs-toggle="modal" href="#task-modal" type="button" class="btn btn-warning m-2">Par date</button>
+            <div class="modal" id="task-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Choisir la période de recherche</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="http://localhost/formation_php/tp_fin_php/public/task/filter/date">
+                        <div class="modal-body">
+                            
+                                <label for="dateStart">Choisir la date début</label> 
+                                <input type="date" name="dateStart" class="form-control">
+                                <label for="dateEnd">Choisir la date de fin</label>
+                                <input type="date" name="dateEnd" class="form-control">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Rechercher</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped  m-2">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Durée</th>
+                <th scope="col">Qui</th>
+                <th scope="col">Etat</th>
+                <th scope="col">Date création</th>
+                <th scope="col">Date modification</th>
+                <th scope="col" class="text-center">Actions</th>
+                <th scope="col" class="text-center">Etat suivant</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <th scope="row">{{ task.id }}</th>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.duration }}</td>
+                <td>{{ task.who }}</td>
+                <td>{{ task.challet }}</td>
+                <td>
+                    {% if task.status == "En attente" %}
+                        <span class="badge bg-warning">En attente</span>
+                    {% elseif task.status == "En cours" %}
+                        <span class="badge bg-primary">En cours</span>
+                    {% elseif task.status == "Termine" %}
+                        <span class="badge bg-success">Terminé</span>
+                    {% endif %}
+                </td>
+                <td>{{ task.create_at }}</td>
+                <td>{{ task.update_at }}</td>
+            
+                <td style="text-align:center">
+                    <a type="button" class="btn btn-warning m-1" href="http://localhost/formation_php/tp_fin_php/public/task/{{task.id}}">
+                        Voir
+                    </a>
+                    <a type="button" class="btn btn-primary m-1" href="http://localhost/formation_php/tp_fin_php/public/task/update/{{task.id}}">
+                        Modifier
+                    <a type="button" class="btn btn-danger m-1" href="javascript:deleteTask({{task.id}})">
+                        Supprimer
+                    </a>
+                </td>
+                <td>
+                    </a>
+                        {% if task.status == "En attente" %}
+                            <a type="button" class="btn btn-warning m-1" href="http://localhost/formation_php/tp_fin_php/public/task/update/status/{{task.id}}">
+                            Passer en cours
+                        {% elseif task.status == "En cours" %}
+                            <a type="button" class="btn btn-primary m-1" href="http://localhost/formation_php/tp_fin_php/public/task/update/status/{{task.id}}">
+                            Passer à terminer
+                        {% elseif task.status == "Termine" %}
+                            
+                        {% endif %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        function deleteTask(id) {
+            console.log(id);
+            // On affiche une fenetre de controle pour confirmer la suppression
+            const question = window.confirm("Voulez-vous vraiment supprimer cette tâche" + id + "?");
+            // On fait l'action de supprimer seulement si la fenetre de controle est confirmer
+            if (question === true) {
+                window.location.href = "http://localhost/formation_php/tp_fin_php/public/task/delete/" + id;
+            }
+        }
+    </script>
+{% endblock %}
+
+
+
